@@ -41,11 +41,11 @@ public class Result implements Serializable {
         this.resCode=resCode;
         this.message=resCode.getMsg();
     }
-    @JSONField(name = "ret")
+    @JSONField(name = "msg")
     public String getMessage() {
         return message;
     }
-
+    @JSONField(name = "msg")
     public void setMessage(String message) {
         this.message = message;
     }

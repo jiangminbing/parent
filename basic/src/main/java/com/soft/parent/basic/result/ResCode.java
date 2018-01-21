@@ -20,6 +20,7 @@ public enum ResCode {
 
     /*api 返回参数 定义返回开始1000*/
 
+
     /*管理后台 返回参数 定义返回开始2000*/
     private int code;
     private String msg;

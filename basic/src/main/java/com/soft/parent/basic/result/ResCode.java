@@ -11,6 +11,7 @@ import java.util.Map;
 public enum ResCode {
     /*公共返回参数*/
     SUCCESS(200,"操作成功"),
+    NO_DATA(201,"没有数据"),
     /*500以上定义为错误*/
     FAILED(500,"操作失败"),
     SYS_ERR(501,"系统错误"),//定义为系统异常 返回的错误信息

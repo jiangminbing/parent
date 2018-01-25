@@ -9,25 +9,16 @@ import java.util.List;
  */
 public class PageResult<T> extends Result implements Serializable{
     private static final long serialVersionUID = 1L;
-	private Integer total;
 
-	private Integer pageCount;
+	private Long total;
 
 	private List<T> data;
 
-	public Integer getPageCount() {
-		return pageCount;
-	}
-
-	public void setPageCount(Integer pageCount) {
-		this.pageCount = pageCount;
-	}
-
-	public Integer getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
-	public void setTotal(Integer total) {
+	public void setTotal(long total) {
 		this.total = total;
 	}
 

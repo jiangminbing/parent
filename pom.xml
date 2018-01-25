@@ -43,7 +43,7 @@
         <fastdfsClient.version>1.19</fastdfsClient.version>
         <google.gson.version>2.3</google.gson.version>
         <beanutils.version>1.9.2</beanutils.version>
-        <springboot.vsersion>1.5.7.RELEASE</springboot.vsersion>
+        <springboot.vsersion>1.5.1.RELEASE</springboot.vsersion>
         <swagger.version>2.2.2</swagger.version>
         <java.version>1.8</java.version>
         <oss.version>2.5.0</oss.version>

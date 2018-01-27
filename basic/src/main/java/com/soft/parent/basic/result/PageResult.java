@@ -14,11 +14,11 @@ public class PageResult<T> extends Result implements Serializable{
 
 	private List<T> data;
 
-	public long getTotal() {
+	public Long getTotal() {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 

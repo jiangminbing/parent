@@ -15,14 +15,16 @@ public enum ResCode {
     /*500以上定义为错误*/
     FAILED(500,"操作失败"),
     SYS_ERR(501,"系统错误"),//定义为系统异常 返回的错误信息
-    UNKNOW_EXCEPTION(502,"未定义错误")
-    ;
+    UNKNOW_EXCEPTION(502,"未定义错误"),
+
 
 
     /*api 返回参数 定义返回开始1000*/
 
 
     /*管理后台 返回参数 定义返回开始2000*/
+    USER_EXISTS(2000,"用户不存在")
+    ;
     private int code;
     private String msg;
 

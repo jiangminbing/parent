@@ -18,6 +18,8 @@ public class SearchDto extends Page implements Serializable {
     //如果是顺序排序使用 true，否则使用false 默认true;
     private Boolean reverse = true;
 
+    private Boolean paging = false;
+
     public void putDate(String key,Date d1,Date d2){
         DateParam param=new DateParam(d1,d2);
         dateMap.put(key,param);
@@ -44,6 +46,14 @@ public class SearchDto extends Page implements Serializable {
 
     public void setReverse(Boolean reverse) {
         this.reverse = reverse;
+    }
+
+    public Boolean getPaging() {
+        return paging;
+    }
+
+    public void setPaging(Boolean paging) {
+        this.paging = paging;
     }
 
     public class DateParam{

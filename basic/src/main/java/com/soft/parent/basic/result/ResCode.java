@@ -20,10 +20,14 @@ public enum ResCode {
 
 
     /*api 返回参数 定义返回开始1000*/
+    LOGIN_ERROR(1000,"账号密码错误"),
+    USER_NOTEXISTS(1001,"用户不存在"),
+    TOKEN_INCORRECT(1002,"token与用户不匹配");
+
 
 
     /*管理后台 返回参数 定义返回开始2000*/
-    USER_EXISTS(2000,"用户不存在")
+//    USER_NOTEXISTS(2000,"用户不存在")
     ;
     private int code;
     private String msg;

@@ -10,7 +10,7 @@ import java.util.List;
 public class PageResult<T> extends Result implements Serializable{
     private static final long serialVersionUID = 1L;
 
-	private Long total;
+	private Long total = 0L;
 
 	private List<T> data;
 

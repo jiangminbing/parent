@@ -1,14 +1,9 @@
-package com.soft.parent.basic.res;
+package com.soft.parent.manager.po;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Author jiangmb
- * @Time 2018/1/27.
- */
-public class GoodsDto implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Goods implements Serializable {
     private Integer goodsId;
 
     private Integer categoryId;
@@ -34,6 +29,8 @@ public class GoodsDto implements Serializable {
     private Integer adminId;
 
     private String detailDescribe;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getGoodsId() {
         return goodsId;
@@ -138,5 +135,4 @@ public class GoodsDto implements Serializable {
     public void setDetailDescribe(String detailDescribe) {
         this.detailDescribe = detailDescribe == null ? null : detailDescribe.trim();
     }
-
 }

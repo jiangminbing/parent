@@ -1,13 +1,9 @@
-package com.soft.parent.basic.res;
+package com.soft.parent.manager.po;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Author jiangmb
- * @Time 2018/2/2.
- */
-public class UserPrivilegeDto implements Serializable {
+public class UserPrivilege implements Serializable {
     private Integer privilegeId;
 
     private Integer userId;

@@ -1,15 +1,9 @@
-package com.soft.parent.basic.res;
+package com.soft.parent.manager.po;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Author jiangmb
- * @Time 2018/2/1.
- */
-public class UserDto implements Serializable {
-    private String token;
-
+public class User implements Serializable {
     private Integer userId;
 
     private String openid;
@@ -37,14 +31,6 @@ public class UserDto implements Serializable {
     private Byte state;
 
     private static final long serialVersionUID = 1L;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 
     public Integer getUserId() {
         return userId;

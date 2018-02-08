@@ -1,13 +1,9 @@
-package com.soft.parent.basic.res;
+package com.soft.parent.manager.po;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Author jiangmb
- * @Time 2018/2/5.
- */
-public class MessageDto implements Serializable {
+public class Message implements Serializable {
     private Integer messageId;
 
     private String messageTitle;

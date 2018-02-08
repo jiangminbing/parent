@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.parent.manager.dao.MessageMapper">
+  <resultMap id="BaseResultMap" type="com.soft.parent.manager.po.Message">
+    <id column="message_id" jdbcType="INTEGER" property="messageId" />
+    <result column="message_title" jdbcType="VARCHAR" property="messageTitle" />
+    <result column="message_short_context" jdbcType="VARCHAR" property="messageShortContext" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="push_time" jdbcType="TIMESTAMP" property="pushTime" />
+    <result column="push" jdbcType="TINYINT" property="push" />
+    <result column="push_now" jdbcType="TINYINT" property="pushNow" />
+    <result column="is_all" jdbcType="TINYINT" property="isAll" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_state" jdbcType="TINYINT" property="delState" />
+    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.soft.parent.manager.po.MessageWithBLOBs">
+    <result column="message_context" jdbcType="LONGVARCHAR" property="messageContext" />
+    <result column="user_ids" jdbcType="LONGVARCHAR" property="userIds" />
+  </resultMap>
+  <!--用户前top最新状态的消息-->
+  <select id="selectMessageTop" resultMap="java.util.Map"  resultType="com.soft.parent.manager.po.Message">
+    select
+    m.message_title,m.message_short_context,m.message_context,m.url,m.message_id,m.push_time,um.user_message_id,m.push_now
+    from t_message m
+    left join t_user_message um
+    on
+    m.message_id=um.message_id
+    where m.del_state=2 and m.push=1 and
+    um.user_id=#{userId}
+    order by push_time desc
+    limit=#{top}
+  </select>
+  <!-- 前端用户获取  消息未读数 -->
+  <select id="countNoReadCount" resultType="java.lang.Long">
+    select count(user_message_id) from
+    t_user_message um
+    left join
+    t_message m
+    on m.message_id=um.message_id
+    where um.user_id=#{userId} and state=2
+    and um.del_state=2 and m.del_state=2
+  </select>
+  <!--前端用户获取  消息数   -->
+  <select id="countMessage" resultType="java.lang.Long">
+    select count(user_message_id) from
+    t_user_message um
+    left join
+    t_message m
+    on m.message_id=um.message_id
+    where um.user_id=#{userId} and um.del_state=2 and m.del_state=2 and state=1
+    UNION
+    select count(user_message_id) from
+    t_user_message um
+    left join
+    t_message m
+    on m.message_id=um.message_id
+    where um.user_id=#{userId} and um.del_state=2 and m.del_state=2 and state=2
+  </select>
+</mapper>

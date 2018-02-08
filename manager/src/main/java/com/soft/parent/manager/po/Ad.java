@@ -1,27 +1,30 @@
-package com.soft.parent.basic.res;
-
-import com.alibaba.fastjson.annotation.JSONField;
+package com.soft.parent.manager.po;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Author jiangmb
- * @Time 2018/1/22.
- */
-public class AdDto implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Ad implements Serializable {
     private Integer adId;
+
     private Integer adPositionId;
+
     private String image;
+
     private String description;
+
     private String url;
+
     private Byte state;
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+
     private Date createTime;
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+
     private Date updateTime;
+
     private Byte delState;
+
+    private Integer adminId;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getAdId() {
         return adId;
@@ -44,7 +47,7 @@ public class AdDto implements Serializable {
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image = image == null ? null : image.trim();
     }
 
     public String getDescription() {
@@ -52,7 +55,7 @@ public class AdDto implements Serializable {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = description == null ? null : description.trim();
     }
 
     public String getUrl() {
@@ -60,7 +63,7 @@ public class AdDto implements Serializable {
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url = url == null ? null : url.trim();
     }
 
     public Byte getState() {
@@ -95,6 +98,11 @@ public class AdDto implements Serializable {
         this.delState = delState;
     }
 
+    public Integer getAdminId() {
+        return adminId;
+    }
 
-
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
 }

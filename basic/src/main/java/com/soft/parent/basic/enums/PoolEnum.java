@@ -6,7 +6,8 @@ package com.soft.parent.basic.enums;
  */
 public enum PoolEnum {
     SYSTEM_SEQ(0,"SYSTEM:ZSET:SEQUENS"),//系统序列
-    USER_TOKEN(0,"USER:TOKEN"),;
+    USER_TOKEN(0,"USER:TOKEN"),
+    LOOK_KEY(0,"LOOK");
     private final int pool;
     private final String key;
 

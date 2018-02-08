@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.parent.manager.dao.JoinOrderMapper">
+  <resultMap id="BaseResultMap" type="com.soft.parent.manager.po.JoinOrder">
+    <id column="join_order_id" jdbcType="INTEGER" property="joinOrderId" />
+    <result column="join_order_number" jdbcType="VARCHAR" property="joinOrderNumber" />
+    <result column="order_ids" jdbcType="VARCHAR" property="orderIds" />
+    <result column="total_price" jdbcType="INTEGER" property="totalPrice" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.soft.parent.manager.po.JoinOrder">
+    <result column="order_numbers" jdbcType="LONGVARCHAR" property="orderNumbers" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    join_order_id, join_order_number, order_ids, total_price
+  </sql>
+  <sql id="Blob_Column_List">
+    order_numbers
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.soft.parent.manager.po.JoinOrderExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_order_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.soft.parent.manager.po.JoinOrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_order_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="begin != null and length != null">
+      limit #{begin} , #{length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_order_join
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_order_join
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.soft.parent.manager.po.JoinOrderExample">
+    delete from t_order_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.soft.parent.manager.po.JoinOrder">
+    insert into t_order_join (join_order_id, join_order_number, order_ids, 
+      total_price, order_numbers)
+    values (#{joinOrderId,jdbcType=INTEGER}, #{joinOrderNumber,jdbcType=VARCHAR}, #{orderIds,jdbcType=VARCHAR}, 
+      #{totalPrice,jdbcType=INTEGER}, #{orderNumbers,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.soft.parent.manager.po.JoinOrder">
+    insert into t_order_join
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="joinOrderId != null">
+        join_order_id,
+      </if>
+      <if test="joinOrderNumber != null">
+        join_order_number,
+      </if>
+      <if test="orderIds != null">
+        order_ids,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+      <if test="orderNumbers != null">
+        order_numbers,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="joinOrderId != null">
+        #{joinOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="joinOrderNumber != null">
+        #{joinOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIds != null">
+        #{orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumbers != null">
+        #{orderNumbers,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.soft.parent.manager.po.JoinOrderExample" resultType="java.lang.Long">
+    select count(*) from t_order_join
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update t_order_join
+    <set>
+      <if test="record.joinOrderId != null">
+        join_order_id = #{record.joinOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.joinOrderNumber != null">
+        join_order_number = #{record.joinOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderIds != null">
+        order_ids = #{record.orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null">
+        total_price = #{record.totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNumbers != null">
+        order_numbers = #{record.orderNumbers,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update t_order_join
+    set join_order_id = #{record.joinOrderId,jdbcType=INTEGER},
+      join_order_number = #{record.joinOrderNumber,jdbcType=VARCHAR},
+      order_ids = #{record.orderIds,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=INTEGER},
+      order_numbers = #{record.orderNumbers,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update t_order_join
+    set join_order_id = #{record.joinOrderId,jdbcType=INTEGER},
+      join_order_number = #{record.joinOrderNumber,jdbcType=VARCHAR},
+      order_ids = #{record.orderIds,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.soft.parent.manager.po.JoinOrder">
+    update t_order_join
+    <set>
+      <if test="joinOrderNumber != null">
+        join_order_number = #{joinOrderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="orderIds != null">
+        order_ids = #{orderIds,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumbers != null">
+        order_numbers = #{orderNumbers,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.soft.parent.manager.po.JoinOrder">
+    update t_order_join
+    set join_order_number = #{joinOrderNumber,jdbcType=VARCHAR},
+      order_ids = #{orderIds,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=INTEGER},
+      order_numbers = #{orderNumbers,jdbcType=LONGVARCHAR}
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.soft.parent.manager.po.JoinOrder">
+    update t_order_join
+    set join_order_number = #{joinOrderNumber,jdbcType=VARCHAR},
+      order_ids = #{orderIds,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=INTEGER}
+    where join_order_id = #{joinOrderId,jdbcType=INTEGER}
+  </update>
+</mapper>

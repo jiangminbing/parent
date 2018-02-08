@@ -1,13 +1,9 @@
-package com.soft.parent.basic.res;
+package com.soft.parent.manager.po;
 
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @Author jiangmb
- * @Time 2018/2/4.
- */
-public class StoreGoodsDto implements Serializable {
+public class StoreGoods implements Serializable {
     private Integer storeId;
 
     private Integer userId;

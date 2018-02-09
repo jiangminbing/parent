@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft.parent.manager.dao.OrderMapperEx">
+  <resultMap id="BaseMap" type="com.soft.parent.manager.model.OrderDto">
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="total_amount" property="totalAmount" jdbcType="INTEGER" />
+    <result column="paid_amount" property="paidAmount" jdbcType="INTEGER" />
+    <result column="discount_amount" property="discountAmount"
+            jdbcType="INTEGER" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="logistics_state" property="logisticsState"
+            jdbcType="TINYINT" />
+    <result column="invoice_tag" property="invoiceTag" jdbcType="TINYINT" />
+    <result column="payment_seq" property="paymentSeq" jdbcType="VARCHAR" />
+    <result column="pay_state" property="payState" jdbcType="TINYINT" />
+    <result column="del_state" property="delState" jdbcType="TINYINT" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <association property="orderCertify" javaType="com.soft.parent.manager.po.OrderCertify">
+      <id column="certify_id" property="orderCertifyId" jdbcType="TINYINT" />
+      <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+      <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+      <result column="create_time" property="orderNumber" jdbcType="VARCHAR" />
+      <result column="update_time" property="orderNumber" jdbcType="VARCHAR" />
+      <association property="admin" javaType="com.bigdatan.b2c.entity.admin.Admin">
+        <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+        <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+      </association>
+    </association>
+    <association property="user" javaType="com.soft.parent.manager.po.User">
+      <id column="user_id" property="userId" jdbcType="INTEGER" />
+      <result column="phone" property="phone" jdbcType="VARCHAR" />
+    </association>
+    <association property="payment" javaType="com.soft.parent.manager.po.Payment">
+      <id column="payment_id" property="paymentId" jdbcType="INTEGER" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+    </association>
+    <association property="receive" javaType="com.soft.parent.manager.po.Receive">
+      <id column="receive_id" property="receiveId" jdbcType="INTEGER" />
+      <result column="contact" property="contact" jdbcType="VARCHAR" />
+      <result column="tel" property="tel" jdbcType="VARCHAR" />
+      <result column="receive_province" property="receiveProvince"
+              jdbcType="VARCHAR" />
+      <result column="receive_city" property="receiveCity" jdbcType="VARCHAR" />
+      <result column="receive_county" property="receiveCounty"
+              jdbcType="VARCHAR" />
+      <result column="receive_address" property="receiveAddress"
+              jdbcType="VARCHAR" />
+    </association>
+    <collection property="orderDetailsList" ofType="com.soft.parent.manager.po.OrderDetails">
+      <id column="order_details_id" property="orderDetailsId" jdbcType="INTEGER" />
+      <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+      <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+      <result column="unit_price" property="unitPrice" jdbcType="INTEGER" />
+      <result column="num" property="num" jdbcType="INTEGER" />
+      <result column="details_amount" property="detailsAmount"
+              jdbcType="INTEGER" />
+    </collection>
+  </resultMap>
+  <!-- 订单详情 -->
+  <select id="selectOrderByOrderNum" parameterType="java.lang.String" resultMap="BaseMap">
+    select
+    o.order_id,d.order_details_id,o.order_number, o.total_amount,
+    o.paid_amount, o.discount_amount,
+    o.send_time, o.logistics_state,
+    o.invoice_tag,
+    o.del_state,
+    o.payment_seq, o.pay_state, o.comment,
+    o.create_time, o.update_time,
+    u.phone as phone,
+    p.name,
+    oc.image_url,
+    d.goods_name, d.unit_name,
+    d.unit_price,d.num,d.details_amount,
+    r.contact,r.tel,r.receive_province,r.receive_city,r.receive_county,r.receive_address,
+    a.admin_name
+    from t_order o
+    left join t_user u on o.user_id = u.user_id
+    left join
+    t_order_details d on o.order_id = d.order_id
+    left join
+    t_user_receive r on o.receive_id = r.receive_id
+    left join
+    t_payment_method p on p.payment_id = o.payment_id
+    left join
+    t_order_certify oc on oc.order_id = o.order_id
+    left join t_admin a on
+    a.admin_id = oc.admin_id
+    where o.order_number=
+    #{oderNumber,jdbcType=INTEGER}
+  </select>
+</mapper>

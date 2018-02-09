@@ -105,7 +105,7 @@
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
         </table>-->
-        <table tableName="t_order" domainObjectName="Order"
+<!--        <table tableName="t_order" domainObjectName="Order"
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
@@ -124,8 +124,17 @@
                enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true"
                selectByExampleQueryId="true">
+        </table>-->
+        <table tableName="t_payment_method" domainObjectName="Payment"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
         </table>
-
+        <table tableName="t_user_receive" domainObjectName="Receive"
+               enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               selectByExampleQueryId="true">
+        </table>
 
     </context>
 </generatorConfiguration>
